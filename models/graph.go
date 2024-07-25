@@ -31,23 +31,6 @@ func (g *Graph) AddEdge(v1, v2 string) {
 	g.vertices[v2][v1] = true
 }
 
-func (g *Graph) NumVertices() int {
-	g.mu.Lock()
-	defer g.mu.Unlock()
-	return len(g.vertices)
-}
-
-func (g *Graph) NumEdges() int {
-	g.mu.Lock()
-	defer g.mu.Unlock()
-
-	count := 0
-	for _, neighbors := range g.vertices {
-		count += len(neighbors)
-	}
-	return count / 2 // Each edge is counted twice
-}
-
 func (g *Graph) ShortestPath(start, end string) ([]string, error) {
 	g.mu.Lock()
 	defer g.mu.Unlock()
